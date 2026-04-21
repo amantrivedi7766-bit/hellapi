@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "hellapi",
+  "version": "${version}",
+  "name": "HellAPI Booster",
+  "description": "Fabric performance scaffold with JNI fallback-safe native path.",
+  "authors": ["hellapi"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.hellapi.boost.HellApiClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.4",
+    "fabric-api": "*"
+  }
+}
