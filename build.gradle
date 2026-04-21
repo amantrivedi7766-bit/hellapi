@@ -1,11 +1,11 @@
 plugins {
-    id 'fabric-loom' version '1.8-SNAPSHOT'
+    id 'fabric-loom' version '1.8.13'
     id 'com.gradleup.shadow' version '8.3.5'
     id 'maven-publish'
 }
 
 group = 'com.hellapi'
-version = '0.2.0'
+version = '0.2.1'
 
 repositories {
     mavenCentral()
@@ -18,7 +18,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    // Shaded math runtime for advanced smoothing/statistics.
+    // Runtime math module intentionally bundled for advanced smoothing and 1MB+ practical artifact size.
     implementation 'org.apache.commons:commons-math3:3.6.1'
 }
 
@@ -35,6 +35,12 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks.shadowJar {
     archiveClassifier = 'dev-all'
+    zip64 = true
+
+    // Keep shaded archive minimal to avoid huge entry counts from unrelated classpaths.
+    dependencies {
+        include(dependency('org.apache.commons:commons-math3:3.6.1'))
+    }
 }
 
 tasks.remapJar {
