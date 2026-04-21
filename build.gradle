@@ -1,10 +1,11 @@
 plugins {
     id 'fabric-loom' version '1.8-SNAPSHOT'
+    id 'com.gradleup.shadow' version '8.3.5'
     id 'maven-publish'
 }
 
 group = 'com.hellapi'
-version = '0.1.0'
+version = '0.2.0'
 
 repositories {
     mavenCentral()
@@ -16,6 +17,9 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    // Shaded math runtime for advanced smoothing/statistics.
+    implementation 'org.apache.commons:commons-math3:3.6.1'
 }
 
 java {
@@ -27,4 +31,13 @@ java {
 
 tasks.withType(JavaCompile).configureEach {
     options.release = 21
+}
+
+tasks.shadowJar {
+    archiveClassifier = 'dev-all'
+}
+
+tasks.remapJar {
+    dependsOn tasks.shadowJar
+    inputFile = tasks.shadowJar.archiveFile
 }

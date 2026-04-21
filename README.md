@@ -46,6 +46,11 @@ Native output `native/build/` me बनेगा.
 4. **Network + SMP**: packet burst smoothing, async decode queues.
 5. **Crash safety**: watchdog + fallback path.
 
+
+## Artifact Size Note
+- Is update me shaded math runtime include kiya gaya hai (`commons-math3`) taaki release jar practical tarike se **1MB+** range me ho aur advanced frame-time smoothing possible ho.
+- Sirf size badhane ke liye dummy/padding files add nahi kiye gaye; jar size now comes from real runtime functionality.
+
 ## CI
 GitHub Actions workflow `.github/workflows/ci.yml`:
 - Java compile + test task

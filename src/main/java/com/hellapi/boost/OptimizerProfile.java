@@ -5,7 +5,8 @@ public record OptimizerProfile(
         boolean adaptiveRenderDistance,
         boolean particleLimiter,
         boolean entityBudget,
-        boolean asyncChunkPrep
+        boolean asyncChunkPrep,
+        int frameWindow
 ) {
     public static OptimizerProfile loadDefault() {
         return new OptimizerProfile(
@@ -13,7 +14,8 @@ public record OptimizerProfile(
                 true,
                 true,
                 true,
-                true
+                true,
+                120
         );
     }
 }

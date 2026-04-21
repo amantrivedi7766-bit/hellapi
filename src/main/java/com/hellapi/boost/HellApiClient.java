@@ -19,6 +19,9 @@ public class HellApiClient implements ClientModInitializer {
         }
 
         OptimizerProfile profile = OptimizerProfile.loadDefault();
-        LOGGER.info("Loaded profile: {}", profile.name());
+        FrameTimeSmoother smoother = new FrameTimeSmoother(profile.frameWindow());
+        float bootSample = smoother.smooth(1.0f);
+
+        LOGGER.info("Loaded profile: {} (boot sample: {})", profile.name(), bootSample);
     }
 }
